@@ -1,0 +1,16 @@
+---
+- name: download Codacy
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+
+  tasks:
+  - name: update repo
+    apt: update_cache=yes
+ 
+  - name: Run codacy
+    docker_container: 
+      name: codacycontainer
+      image: codacy/codacy-checkstyle
+      ports: 
+       - 9902:9000

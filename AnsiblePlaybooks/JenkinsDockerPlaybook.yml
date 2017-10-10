@@ -1,0 +1,16 @@
+---
+- name: download jenkins image
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+
+  tasks:
+    - name: update repo
+      apt: update_cache=yes
+
+    - name: Run jenkins
+      docker_container: 
+        name: jenkinscontainer
+        image: jenkins/jenkins
+        ports: 
+         - 9900:8080
