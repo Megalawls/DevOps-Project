@@ -7,7 +7,7 @@
   - name: Update
     command: apt-get update
     
-  - name: Install Maven, git, wget, and curl
+  - name: Install wget and zabbix-agent
     apt: name={{item}} state=latest
     with_items: 
       - wget
@@ -17,4 +17,5 @@
     shell: "{{ item }}"
     with_items:
       - 'sudo rm /etc/zabbix/zabbix_agentd.conf'
-      - 'echo deb http://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list'
+      - 'sudo wget https://raw.githubusercontent.com/Megalawls/DevOps-Project/master/Zabbix%20Files/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf'
+      - 'sudo service zabbix-agent restart'

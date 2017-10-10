@@ -25,3 +25,11 @@ export AWS_ACCESS_KEY_ID='XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 export AWS_SECRET_ACCESS_KEY='XXXXXXXXXXXXXXXXXXX'
 export ANSIBLE_HOSTS=/etc/ansible/hosts/ec2.py
 export EC2_INI_PATH=/etc/ansible/hosts/ec2.ini
+
+#Installs unzip,  wget, terraform
+sudo -H apt-get install -y unzip
+sudo -H apt-get install -y wget
+wget https://releases.hashicorp.com/terraform/0.9.8/terraform_0.9.8_linux_amd64.zip
+unzip terraform_0.9.8_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+terraform --version
