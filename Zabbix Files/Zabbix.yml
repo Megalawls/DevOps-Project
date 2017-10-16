@@ -1,7 +1,7 @@
 ---
 - hosts: all
-  remote_user:ubuntu
-  become: yes
+  remote_user: ubuntu
+  become: true
   
   tasks:
   - name: Update
@@ -13,9 +13,11 @@
       - wget
       - zabbix-agent
 
-  - name: Configre Zabbix
-    shell: "{{ item }}"
-    with_items:
-      - 'sudo rm /etc/zabbix/zabbix_agentd.conf'
-      - 'sudo wget https://raw.githubusercontent.com/Megalawls/DevOps-Project/master/Zabbix%20Files/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf'
-      - 'sudo service zabbix-agent restart'
+  - name: Copy Zabbix conf file
+    get_url: url='https://raw.githubusercontent.com/Megalawls/DevOps-Project/master/Zabbix%20Files/zabbix_agentd.conf' dest='/etc/zabbix/zabbix_agentd.conf' force=yes
+    notify:
+      - Start zabbix-agent
+      
+  handlers:
+  - name: Start zabbix-agent
+    service: name=zabbix-agent state=started enabled=yes
