@@ -1,0 +1,16 @@
+---
+- name: download jira image
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+
+  tasks:
+    - name: update repo
+      apt: update_cache=yes
+
+    - name: Run Jira
+      docker_container: 
+        name: jiracontainer
+        image: cptactionhank/atlassian-jira-software:latest
+        ports: 
+         - 9902:8080

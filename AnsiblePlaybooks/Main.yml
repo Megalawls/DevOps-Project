@@ -2,4 +2,4 @@
   - import_playbook: DockerPlaybook.yml
   - import_playbook: JenkinsDockerPlaybook.yml
   - import_playbook: NexusDockerPlaybook.yml
-  - import_playbook: CodacyDockerPlaybook.yml
+  - import_playbook: JiraDockerPlaybook.yml
